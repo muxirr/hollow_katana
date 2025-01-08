@@ -11,23 +11,23 @@ public:
 
     void restart()
     {
-        this->pass_time = 0;
+        this->passTime = 0;
         this->shotted = false;
     }
 
-    void set_wait_time(float wait_time)
+    void setWaitTime(float waitTime)
     {
-        this->wait_time = wait_time;
+        this->waitTime = waitTime;
     }
 
-    void set_one_shot(bool one_shot)
+    void setOneShot(bool oneShot)
     {
-        this->one_shot = one_shot;
+        this->oneShot = oneShot;
     }
 
-    void set_time_out(std::function<void()> on_timeout)
+    void setTimeOut(std::function<void()> onTimeout)
     {
-        this->on_timeout = on_timeout;
+        this->onTimeout = onTimeout;
     }
 
     void pause()
@@ -40,28 +40,28 @@ public:
         this->paused = false;
     }
 
-    void on_update(float delta)
+    void onUpdate(float delta)
     {
         if (paused)
             return;
-        this->pass_time += delta;
-        if (this->pass_time >= this->wait_time)
+        this->passTime += delta;
+        if (this->passTime >= this->waitTime)
         {
-            bool can_shot = (!one_shot || (one_shot && !shotted));
+            bool canShot = (!oneShot || (oneShot && !shotted));
             this->shotted = true;
-            if (can_shot && on_timeout)
-                this->on_timeout();
-            this->pass_time -= this->wait_time;
+            if (canShot && onTimeout)
+                this->onTimeout();
+            this->passTime -= this->waitTime;
         }
     }
 
 private:
-    float pass_time = 0;
-    float wait_time = 0;
+    float passTime = 0;
+    float waitTime = 0;
     bool paused = false;
     bool shotted = false;
-    bool one_shot = false;
-    std::function<void()> on_timeout;
+    bool oneShot = false;
+    std::function<void()> onTimeout;
 };
 
 #endif // _TIMER_H_

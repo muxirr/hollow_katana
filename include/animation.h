@@ -19,13 +19,13 @@ public:
     };
     Animation()
     {
-        timer.set_one_shot(false);
-        timer.set_time_out([&]()
-                           { idx_frame++;
-                            if(idx_frame >= frame_list.size()){
-                                idx_frame = is_loop?0:frame_list.size()-1;
-                                if(!is_loop && on_finished)
-                                 on_finished();                              
+        timer.setOneShot(false);
+        timer.setTimeOut([&]()
+                           { idxFrame++;
+                            if(idxFrame >= frameList.size()){
+                                idxFrame = isLoop?0:frameList.size()-1;
+                                if(!isLoop && onFinished)
+                                 onFinished();                              
                             } });
     }
     ~Animation() = default;
@@ -33,32 +33,32 @@ public:
     void reset()
     {
         timer.restart();
-        idx_frame = 0;
+        idxFrame = 0;
     }
-    void set_position(const Vector2 &position)
+    void setPosition(const Vector2 &position)
     {
         this->position = position;
     }
-    void set_loop(bool is_loop)
+    void setLoop(bool isLoop)
     {
-        this->is_loop = is_loop;
+        this->isLoop = isLoop;
     }
-    void set_interval(float interval)
+    void setInterval(float interval)
     {
-        timer.set_wait_time(interval);
+        timer.setWaitTime(interval);
     }
     /*
     param: Centered, BottomCentered
     */
-    void set_anchor_mode(AnchorMode anchormode)
+    void setAnchorMode(AnchorMode anchormode)
     {
         this->anchormode = anchormode;
     }
-    bool set_on_finished(std::function<void()> on_finished)
+    bool setOnFinished(std::function<void()> onFinished)
     {
-        this->on_finished = on_finished;
+        this->onFinished = onFinished;
     }
-    void add_frame(IMAGE *img, int num_h)
+    void addFrame(IMAGE *img, int num_h)
     {
         int w = img->getwidth();
         int h = img->getheight();
@@ -70,48 +70,48 @@ public:
             rect_src.y = 0;
             rect_src.w = w_frame;
             rect_src.h = h;
-            frame_list.emplace_back(img, rect_src);
+            frameList.emplace_back(img, rect_src);
         }
     }
-    void add_frame(Atlas &atlas)
+    void addFrame(Atlas &atlas)
     {
-        for (int i = 0; i < atlas.get_size(); i++)
+        for (int i = 0; i < atlas.getSize(); i++)
         {
-            IMAGE *img = atlas.get_image(i);
+            IMAGE *img = atlas.getImage(i);
             Rect rect_src;
             rect_src.x = 0;
             rect_src.y = 0;
             rect_src.w = img->getwidth();
             rect_src.h = img->getheight();
-            frame_list.emplace_back(img, rect_src);
+            frameList.emplace_back(img, rect_src);
         }
     }
 
-    void on_update(float delta)
+    void onUpdate(float delta)
     {
-        timer.on_update(delta);
+        timer.onUpdate(delta);
     }
 
-    void on_render()
+    void onRender()
     {
-        const Frame &frame = frame_list[idx_frame];
+        const Frame &frame = frameList[idxFrame];
 
-        Rect rect_dst;
-        rect_dst.x = (int)position.x - frame.rect_src.w / 2;
-        rect_dst.y = (anchormode == AnchorMode::Centered) ? (int)position.y - frame.rect_src.h / 2 : (int)position.y - frame.rect_src.h;
-        rect_dst.w = frame.rect_src.w;
-        rect_dst.h = frame.rect_src.h;
-        putimage_ex(frame.img, &rect_dst, &frame.rect_src);
+        Rect rectDst;
+        rectDst.x = (int)position.x - frame.rectSrc.w / 2;
+        rectDst.y = (anchormode == AnchorMode::Centered) ? (int)position.y - frame.rectSrc.h / 2 : (int)position.y - frame.rectSrc.h;
+        rectDst.w = frame.rectSrc.w;
+        rectDst.h = frame.rectSrc.h;
+        putimageEx(frame.img, &rectDst, &frame.rectSrc);
     }
 
 private:
     struct Frame
     {
-        Rect rect_src;
+        Rect rectSrc;
         IMAGE *img = nullptr;
 
         Frame() = default;
-        Frame(IMAGE *img, const Rect &rect_src) : img(img), rect_src(rect_src)
+        Frame(IMAGE *img, const Rect &rectSrc) : img(img), rectSrc(rectSrc)
         {
         }
         ~Frame() = default;
@@ -120,10 +120,10 @@ private:
 private:
     Timer timer;
     Vector2 position;
-    bool is_loop = false;
-    size_t idx_frame = 0;
-    std::vector<Frame> frame_list;
-    std::function<void()> on_finished;
+    bool isLoop = false;
+    size_t idxFrame = 0;
+    std::vector<Frame> frameList;
+    std::function<void()> onFinished;
     AnchorMode anchormode = AnchorMode::Centered;
 };
 

@@ -11,40 +11,40 @@ public:
 
     void load(LPCTSTR path_template, int num)
     {
-        this->img_list.clear();
-        this->img_list.resize(num);
+        this->imgList.clear();
+        this->imgList.resize(num);
 
         TCHAR path[256];
         for (int i = 0; i < num; i++)
         {
-            wsprintf(path, path_template, i + 1);
-            loadimage(&img_list[i], path);
+            _stprintf_s(path, path_template, i + 1);
+            loadimage(&imgList[i], path);
         }
     }
 
     void clear()
     {
-        this->img_list.clear();
+        this->imgList.clear();
     }
 
-    int get_size()
+    int getSize()
     {
-        return this->img_list.size();
+        return this->imgList.size();
     }
 
-    IMAGE *get_image(int index)
+    IMAGE *getImage(int index)
     {
-        if (index < 0 || index >= img_list.size())
+        if (index < 0 || index >= imgList.size())
             return nullptr;
-        return &this->img_list[index];
+        return &this->imgList[index];
     }
-    void add_image(const IMAGE &img)
+    void addImage(const IMAGE &img)
     {
-        this->img_list.push_back(img);
+        this->imgList.push_back(img);
     }
 
 private:
-    std::vector<IMAGE> img_list;
+    std::vector<IMAGE> imgList;
 };
 
-#endif
+#endif // _ALTAS_H_

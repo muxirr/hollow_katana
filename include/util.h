@@ -1,7 +1,9 @@
 #ifndef _UTIL_H_
 #define _UTIL_H_
 
-#include "graphics.h"
+#include <graphics.h>
+#include <codecvt>
+#include <string>
 
 #pragma comment(lib, "winmm.lib")
 #pragma comment(lib, "Msimg32.lib")
@@ -12,32 +14,32 @@ struct Rect
     int w, h;
 };
 
-inline void putimage_ex(IMAGE *img, const Rect *rect_dst, const Rect *rect_src = nullptr)
+inline void putimageEx(IMAGE *img, const Rect *rectDst, const Rect *rectSrc = nullptr)
 {
-    static BLENDFUNCTION blend_func = {AC_SRC_OVER, 0, 255, AC_SRC_ALPHA};
+    static BLENDFUNCTION blendFunc = {AC_SRC_OVER, 0, 255, AC_SRC_ALPHA};
 
-    AlphaBlend(GetImageHDC(GetWorkingImage()), (int)(rect_dst->x), (int)(rect_dst->y ), rect_dst->w, rect_dst->h, GetImageHDC(img), rect_src ? rect_src->x : 0, rect_src ? rect_src->y : 0, rect_src ? rect_src->w : img->getwidth(), rect_src ? rect_src->h : img->getheight(), blend_func);
+    AlphaBlend(GetImageHDC(GetWorkingImage()), (int)(rectDst->x), (int)(rectDst->y), rectDst->w, rectDst->h, GetImageHDC(img), rectSrc ? rectSrc->x : 0, rectSrc ? rectSrc->y : 0, rectSrc ? rectSrc->w : img->getwidth(), rectSrc ? rectSrc->h : img->getheight(), blendFunc);
 }
 
-inline void load_audio(LPCTSTR path, LPCTSTR id)
+inline void loadAudio(LPCTSTR path, LPCTSTR id)
 {
-    static TCHAR str_cmd[512];
-    wsprintf(str_cmd, L"open %s alias %s", path, id);
-    mciSendString(str_cmd, NULL, 0, NULL);
+    static TCHAR strCmd[512];
+    wsprintf(strCmd, _T("open %s alias %s"), path, id);
+    mciSendString(strCmd, NULL, 0, NULL);
 }
 
-inline void play_audio(LPCTSTR id, bool is_loop = false)
+inline void playAudio(LPCTSTR id, bool isLoop = false)
 {
-    static TCHAR str_cmd[512];
-    wsprintf(str_cmd, L"play %s %s from 0", id, is_loop ? L"repeat" : L"");
-    mciSendString(str_cmd, NULL, 0, NULL);
+    static TCHAR strCmd[512];
+    wsprintf(strCmd, _T("play %s %s from 0"), id, isLoop ? _T("repeat") : _T(""));
+    mciSendString(strCmd, NULL, 0, NULL);
 }
 
-inline void stop_audio(LPCTSTR id)
+inline void stopAudio(LPCTSTR id)
 {
-    static TCHAR str_cmd[512];
-    wsprintf(str_cmd, L"stop %s", id);
-    mciSendString(str_cmd, NULL, 0, NULL);
+    static TCHAR strCmd[512];
+    wsprintf(strCmd, _T("stop %s"), id);
+    mciSendString(strCmd, NULL, 0, NULL);
 }
 
 #endif
