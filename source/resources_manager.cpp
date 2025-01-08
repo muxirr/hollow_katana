@@ -1,6 +1,6 @@
 #include "resources_manager.h"
 #include "util.h"
-
+#include <iostream>
 struct imgResInfo
 {
     std::string id;
@@ -58,7 +58,7 @@ static const std::vector<atlasResInfo> atlasInfoList = {
 
 static inline bool checkImageValid(IMAGE *img)
 {
-    return GetImageBuffer(img);
+    return img->getwidth() > 0 && img->getheight() > 0;
 }
 
 void ResourcesManager::load()

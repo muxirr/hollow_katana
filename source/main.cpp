@@ -5,9 +5,9 @@
 #include <windows.h>
 #include <chrono>
 #include <thread>
-#include <codecvt>
 
 const int FPS = 144;
+const long long NANOSECONDS_PER_SECOND = 1000000000LL;
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
 {
@@ -27,7 +27,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         return -1;
     }
 
-    const nanoseconds frameDuration(100000000 / FPS); // 144 FPS
+    const nanoseconds frameDuration(NANOSECONDS_PER_SECOND / FPS); // 144 FPS
     steady_clock::time_point lastTime = steady_clock::now();
     ExMessage msg;
     bool isQuit = false;
