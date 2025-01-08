@@ -18,20 +18,20 @@ static const std::vector<imgResInfo> imgInfoList = {
     {_T("background"), _T(R"(assest\background.png)")},
     {_T("uiHeart"), _T(R"(assest\ui_heart.png)")},
 
-    {_T("palyerAttackRigth"), _T(R"(assest\palyer\attack.png)")},
-    {_T("palyerDeadRight"), _T(R"(assest\player\dead.png)")},
+    {_T("playerAttackRigth"), _T(R"(assest\player\attack.png)")},
+    {_T("playerDeadRight"), _T(R"(assest\player\dead.png)")},
     {_T("playerFallRight"), _T(R"(assest\player\fall.png)")},
     {_T("playerIdleRight"), _T(R"(assest\player\idle.png)")},
     {_T("playerJumpRight"), _T(R"(assest\player\jump.png)")},
     {_T("playerRunRight"), _T(R"(assest\player\run.png)")},
     {_T("playerRollRight"), _T(R"(assest\player\roll.png)")},
 
-    {_T("palyerVfxAttackDown"), _T(R"(assest\palyer\vfx_attack_down.png)")},
-    {_T("palyerVfxAttackLeft"), _T(R"(assest\palyer\vfx_attack_left.png)")},
-    {_T("palyerVfxAttackRight"), _T(R"(assest\palyer\vfx_attack_right.png)")},
-    {_T("palyerVfxAttackUp"), _T(R"(assest\palyer\vfx_attack_up.png)")},
-    {_T("palyerVfxJump"), _T(R"(assest\palyer\vfx_jump.png)")},
-    {_T("palyerVfxLand"), _T(R"(assest\palyer\vfx_land.png)")},
+    {_T("playerVfxAttackDown"), _T(R"(assest\player\vfx_attack_down.png)")},
+    {_T("playerVfxAttackLeft"), _T(R"(assest\player\vfx_attack_left.png)")},
+    {_T("playerVfxAttackRight"), _T(R"(assest\player\vfx_attack_right.png)")},
+    {_T("playerVfxAttackUp"), _T(R"(assest\player\vfx_attack_up.png)")},
+    {_T("playerVfxJump"), _T(R"(assest\player\vfx_jump.png)")},
+    {_T("playerVfxLand"), _T(R"(assest\player\vfx_land.png)")},
 };
 
 static const std::vector<atlasResInfo> atlasInfoList = {
@@ -89,10 +89,10 @@ void ResourcesManager::load()
         atlasPool[info.id] = atlas;
     }
 
-    flipImage(_T("palyerAttackRigth"), _T("palyerAttackLeft"), 5);
-    flipImage(_T("palyerDeadRight"), _T("palyerDeadLeft"), 6);
+    flipImage(_T("playerAttackRigth"), _T("playerAttackLeft"), 5);
+    flipImage(_T("playerDeadRight"), _T("playerDeadLeft"), 6);
     flipImage(_T("playerFallRight"), _T("playerFallLeft"), 5);
-    flipImage(_T("playerIdleRight"), _T("palyerIdleLeft"), 5);
+    flipImage(_T("playerIdleRight"), _T("playerIdleLeft"), 5);
     flipImage(_T("playerJumpRight"), _T("playerJumpLeft"), 5);
     flipImage(_T("playerRunRight"), _T("playerRunLeft"), 10);
     flipImage(_T("playerRollRight"), _T("playerRollLeft"), 7);
