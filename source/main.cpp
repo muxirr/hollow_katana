@@ -1,5 +1,6 @@
 #include "util.h"
 #include "resources_manager.h"
+#include "collision_manager.h"
 
 #include <graphics.h>
 #include <windows.h>
@@ -51,7 +52,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         lastTime = frameStart;
         // 计算帧耗时
         nanoseconds sleepDuration = duration_cast<nanoseconds>(steady_clock::now() - frameStart);
-        if (sleepDuration > nanoseconds(0)) // 如果帧耗时大于0
+        // 如果帧耗时大于0
+        if (sleepDuration > nanoseconds(0))
         {
             // 休眠
             std::this_thread::sleep_for(frameDuration - sleepDuration);

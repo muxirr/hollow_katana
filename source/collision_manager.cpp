@@ -60,5 +60,5 @@ CollisionManager *CollisionManager::Instance()
     return manager;
 }
 
-CollisionBox::CollisionBox() = default;
-CollisionBox::~CollisionBox() = default;
+CollisionManager::CollisionManager() = default;
+CollisionManager::~CollisionManager() = default;
