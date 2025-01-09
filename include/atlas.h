@@ -1,5 +1,6 @@
 #ifndef _ALTAS_H_
 #define _ALTAS_H_
+
 #include <vector>
 #include <graphics.h>
 

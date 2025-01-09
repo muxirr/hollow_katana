@@ -2,8 +2,6 @@
 #define _UTIL_H_
 
 #include <graphics.h>
-#include <codecvt>
-#include <string>
 
 #pragma comment(lib, "winmm.lib")
 #pragma comment(lib, "Msimg32.lib")

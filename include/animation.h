@@ -21,7 +21,7 @@ public:
     {
         timer.setOneShot(false);
         timer.setTimeOut([&]()
-                           { idxFrame++;
+                         {  idxFrame++;
                             if(idxFrame >= frameList.size()){
                                 idxFrame = isLoop?0:frameList.size()-1;
                                 if(!isLoop && onFinished)
