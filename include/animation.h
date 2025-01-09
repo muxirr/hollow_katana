@@ -87,12 +87,12 @@ public:
         }
     }
 
-    void onUpdate(float delta)
+    void update(float delta)
     {
-        timer.onUpdate(delta);
+        timer.update(delta);
     }
 
-    void onRender()
+    void render()
     {
         const Frame &frame = frameList[idxFrame];
 

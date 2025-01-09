@@ -40,7 +40,7 @@ public:
         this->paused = false;
     }
 
-    void onUpdate(float delta)
+    void update(float delta)
     {
         if (paused)
             return;
