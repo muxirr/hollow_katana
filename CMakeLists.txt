@@ -11,7 +11,8 @@ add_definitions(-D_SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING)
 file(GLOB SRC "./source/*.cpp" "./source/*.c")
 
 include_directories(include ${VS_DIR}/include)
+link_directories(${VS_DIR}/lib/x64)
 
 add_executable(${PROJECT_NAME} WIN32 ${SRC})
 
-target_link_libraries(${PROJECT_NAME} PUBLIC ${VS_DIR}/lib/x64/EasyXa.lib)
+target_link_libraries(${PROJECT_NAME} PUBLIC EasyXa)

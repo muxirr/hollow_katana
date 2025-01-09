@@ -54,23 +54,23 @@ public:
     {
         this->anchormode = anchormode;
     }
-    bool setOnFinished(std::function<void()> onFinished)
+    void setOnFinished(std::function<void()> onFinished)
     {
         this->onFinished = onFinished;
     }
-    void addFrame(IMAGE *img, int num_h)
+    void addFrame(IMAGE *img, int numH)
     {
         int w = img->getwidth();
         int h = img->getheight();
-        int w_frame = w / num_h;
-        for (int i = 0; i < num_h; i++)
+        int wFrame = w / numH;
+        for (int i = 0; i < numH; i++)
         {
-            Rect rect_src;
-            rect_src.x = i * w_frame;
-            rect_src.y = 0;
-            rect_src.w = w_frame;
-            rect_src.h = h;
-            frameList.emplace_back(img, rect_src);
+            Rect rectSrc;
+            rectSrc.x = i * wFrame;
+            rectSrc.y = 0;
+            rectSrc.w = wFrame;
+            rectSrc.h = h;
+            frameList.emplace_back(img, rectSrc);
         }
     }
     void addFrame(Atlas &atlas)
@@ -78,12 +78,12 @@ public:
         for (int i = 0; i < atlas.getSize(); i++)
         {
             IMAGE *img = atlas.getImage(i);
-            Rect rect_src;
-            rect_src.x = 0;
-            rect_src.y = 0;
-            rect_src.w = img->getwidth();
-            rect_src.h = img->getheight();
-            frameList.emplace_back(img, rect_src);
+            Rect rectSrc;
+            rectSrc.x = 0;
+            rectSrc.y = 0;
+            rectSrc.w = img->getwidth();
+            rectSrc.h = img->getheight();
+            frameList.emplace_back(img, rectSrc);
         }
     }
 

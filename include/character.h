@@ -83,7 +83,7 @@ public:
     virtual void update(float delta);
     virtual void render();
 
-    virtual void hurt();
+    virtual void hurted();
 
     void switchState(const std::string &id)
     {

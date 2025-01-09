@@ -35,7 +35,7 @@ void Character::decreaseHp()
     {
         makeInvulnerable();
     }
-    hurt();
+    hurted();
 }
 
 void Character::update(float delta)
@@ -93,4 +93,19 @@ void Character::update(float delta)
     Animation &animation = isFacingLeft ? currentAnimation->left : currentAnimation->right;
     animation.update(delta);
     animation.setPosition(position);
+}
+
+void Character::render()
+{
+    // do nothing
+}
+
+void Character::input(const ExMessage &msg)
+{
+    // do nothing
+}
+
+void Character::hurted()
+{
+    // do nothing
 }
