@@ -74,6 +74,8 @@ public:
         return attackDir;
     }
 
+    void log();
+
 private:
     Timer timerRollCd;
     bool isRolling = false;
@@ -82,6 +84,8 @@ private:
     Timer timerAttackCd;
     bool isAttacking = false;
     bool isAttackCdComp = true;
+
+    Timer timerLog;
 
     bool isLeftKeyDown = false;
     bool isRightKeyDown = false;

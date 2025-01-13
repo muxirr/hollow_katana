@@ -2,6 +2,9 @@
 
 #include <graphics.h>
 
+CollisionManager::CollisionManager() = default;
+CollisionManager::~CollisionManager() = default;
+
 CollisionBox *CollisionManager::createCollisionBox()
 {
     CollisionBox *collisionBox = new CollisionBox();
@@ -40,7 +43,7 @@ void CollisionManager::processCollide()
     }
 }
 
-void CollisionManager::onDebugRender()
+void CollisionManager::onDebugrender()
 {
     for (CollisionBox *collisionBox : collisionBoxList)
     {
@@ -59,6 +62,3 @@ CollisionManager *CollisionManager::Instance()
     }
     return manager;
 }
-
-CollisionManager::CollisionManager() = default;
-CollisionManager::~CollisionManager() = default;

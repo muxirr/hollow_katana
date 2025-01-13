@@ -1,6 +1,12 @@
 #include "resources_manager.h"
 #include "util.h"
+
 #include <iostream>
+
+ResourcesManager::ResourcesManager() = default;
+
+ResourcesManager::~ResourcesManager() = default;
+
 struct imgResInfo
 {
     std::string id;
@@ -18,7 +24,7 @@ static const std::vector<imgResInfo> imgInfoList = {
     {_T("background"), _T(R"(assest\background.png)")},
     {_T("uiHeart"), _T(R"(assest\ui_heart.png)")},
 
-    {_T("playerAttackRigth"), _T(R"(assest\player\attack.png)")},
+    {_T("playerAttackRight"), _T(R"(assest\player\attack.png)")},
     {_T("playerDeadRight"), _T(R"(assest\player\dead.png)")},
     {_T("playerFallRight"), _T(R"(assest\player\fall.png)")},
     {_T("playerIdleRight"), _T(R"(assest\player\idle.png)")},
@@ -89,7 +95,7 @@ void ResourcesManager::load()
         atlasPool[info.id] = atlas;
     }
 
-    flipImage(_T("playerAttackRigth"), _T("playerAttackLeft"), 5);
+    flipImage(_T("playerAttackRight"), _T("playerAttackLeft"), 5);
     flipImage(_T("playerDeadRight"), _T("playerDeadLeft"), 6);
     flipImage(_T("playerFallRight"), _T("playerFallLeft"), 5);
     flipImage(_T("playerIdleRight"), _T("playerIdleLeft"), 5);
@@ -131,7 +137,7 @@ void ResourcesManager::load()
     loadAudio(_T(R"(assest\audio\player_hurt.mp3)"), _T("playerHurt"));
     loadAudio(_T(R"(assest\audio\player_jump.mp3)"), _T("playerJump"));
     loadAudio(_T(R"(assest\audio\player_land.mp3)"), _T("playerLand"));
-    loadAudio(_T(R"(assest\audio\player_roll.mp3)"), _T("playerRol_T("));
+    loadAudio(_T(R"(assest\audio\player_roll.mp3)"), _T("playerRoll"));
     loadAudio(_T(R"(assest\audio\player_run.mp3)"), _T("playerRun"));
 }
 
@@ -150,7 +156,10 @@ IMAGE *ResourcesManager::findImage(const std::string &name) const
     const auto &it = imagePool.find(name);
     if (it == imagePool.end())
     {
-        return nullptr;
+        TCHAR errMsg[512];
+        wsprintf(errMsg, _T("Unable to find image: %hs"), name.c_str());
+        MessageBox(nullptr, errMsg, _T("Error"), MB_OK | MB_ICONERROR);
+        exit(-1);
     }
     return it->second;
 }
@@ -210,7 +219,3 @@ ResourcesManager *ResourcesManager::Instance()
     }
     return manager;
 }
-
-ResourcesManager::ResourcesManager() = default;
-
-ResourcesManager::~ResourcesManager() = default;

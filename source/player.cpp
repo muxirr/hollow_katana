@@ -1,7 +1,10 @@
 #include "player.h"
 #include "resources_manager.h"
+#include "player_state_nodes.h"
+#include "bullet_time_manager.h"
 
 #include <cmath>
+#include <iostream>
 
 Player::Player()
 {
@@ -38,13 +41,13 @@ Player::Player()
         animationAttackLeft.setInterval(0.05f);
         animationAttackLeft.setLoop(false);
         animationAttackLeft.setAnchorMode(Animation::AnchorMode::BottomCentered);
-        animationAttackLeft.addFrame(ResourcesManager::Instance()->findImage(_T("player_attack_left")), 5);
+        animationAttackLeft.addFrame(ResourcesManager::Instance()->findImage(_T("playerAttackLeft")), 5);
 
         Animation &animationAttackRight = animationAttack.right;
         animationAttackRight.setInterval(0.05f);
         animationAttackRight.setLoop(false);
         animationAttackRight.setAnchorMode(Animation::AnchorMode::BottomCentered);
-        animationAttackRight.addFrame(ResourcesManager::Instance()->findImage(_T("player_attack_right")), 5);
+        animationAttackRight.addFrame(ResourcesManager::Instance()->findImage(_T("playerAttackRight")), 5);
     }
     {
         AnimationGroup &animationDead = animationPool["dead"];
@@ -53,13 +56,13 @@ Player::Player()
         animationDeadLeft.setInterval(0.1f);
         animationDeadLeft.setLoop(false);
         animationDeadLeft.setAnchorMode(Animation::AnchorMode::BottomCentered);
-        animationDeadLeft.addFrame(ResourcesManager::Instance()->findImage(_T("player_dead_left")), 6);
+        animationDeadLeft.addFrame(ResourcesManager::Instance()->findImage(_T("playerDeadLeft")), 6);
 
         Animation &animationDeadRight = animationDead.right;
         animationDeadRight.setInterval(0.1f);
         animationDeadRight.setLoop(false);
         animationDeadRight.setAnchorMode(Animation::AnchorMode::BottomCentered);
-        animationDeadRight.addFrame(ResourcesManager::Instance()->findImage(_T("player_dead_right")), 6);
+        animationDeadRight.addFrame(ResourcesManager::Instance()->findImage(_T("playerDeadRight")), 6);
     }
     {
         AnimationGroup &animationFall = animationPool["fall"];
@@ -68,13 +71,13 @@ Player::Player()
         animationFallLeft.setInterval(0.15f);
         animationFallLeft.setLoop(false);
         animationFallLeft.setAnchorMode(Animation::AnchorMode::BottomCentered);
-        animationFallLeft.addFrame(ResourcesManager::Instance()->findImage(_T("player_fall_left")), 5);
+        animationFallLeft.addFrame(ResourcesManager::Instance()->findImage(_T("playerFallLeft")), 5);
 
         Animation &animationFallRight = animationFall.right;
         animationFallRight.setInterval(0.15f);
         animationFallRight.setLoop(false);
         animationFallRight.setAnchorMode(Animation::AnchorMode::BottomCentered);
-        animationFallRight.addFrame(ResourcesManager::Instance()->findImage(_T("player_fall_right")), 5);
+        animationFallRight.addFrame(ResourcesManager::Instance()->findImage(_T("playerFallRight")), 5);
     }
     {
         AnimationGroup &animationIdle = animationPool["idle"];
@@ -83,13 +86,13 @@ Player::Player()
         animationIdleLeft.setInterval(0.15f);
         animationIdleLeft.setLoop(false);
         animationIdleLeft.setAnchorMode(Animation::AnchorMode::BottomCentered);
-        animationIdleLeft.addFrame(ResourcesManager::Instance()->findImage(_T("player_idle_left")), 5);
+        animationIdleLeft.addFrame(ResourcesManager::Instance()->findImage(_T("playerIdleLeft")), 5);
 
         Animation &animationIdleRight = animationIdle.right;
         animationIdleRight.setInterval(0.15f);
         animationIdleRight.setLoop(false);
         animationIdleRight.setAnchorMode(Animation::AnchorMode::BottomCentered);
-        animationIdleRight.addFrame(ResourcesManager::Instance()->findImage(_T("player_idle_right")), 5);
+        animationIdleRight.addFrame(ResourcesManager::Instance()->findImage(_T("playerIdleRight")), 5);
     }
     {
         AnimationGroup &animationJump = animationPool["jump"];
@@ -98,13 +101,13 @@ Player::Player()
         animationJumpLeft.setInterval(0.15f);
         animationJumpLeft.setLoop(false);
         animationJumpLeft.setAnchorMode(Animation::AnchorMode::BottomCentered);
-        animationJumpLeft.addFrame(ResourcesManager::Instance()->findImage(_T("player_jump_left")), 5);
+        animationJumpLeft.addFrame(ResourcesManager::Instance()->findImage(_T("playerJumpLeft")), 5);
 
         Animation &animationJumpRight = animationJump.right;
         animationJumpRight.setInterval(0.15f);
         animationJumpRight.setLoop(false);
         animationJumpRight.setAnchorMode(Animation::AnchorMode::BottomCentered);
-        animationJumpRight.addFrame(ResourcesManager::Instance()->findImage(_T("player_jump_right")), 5);
+        animationJumpRight.addFrame(ResourcesManager::Instance()->findImage(_T("playerJumpRight")), 5);
     }
     {
         AnimationGroup &animationRoll = animationPool["roll"];
@@ -113,13 +116,13 @@ Player::Player()
         animationRollLeft.setInterval(0.05f);
         animationRollLeft.setLoop(false);
         animationRollLeft.setAnchorMode(Animation::AnchorMode::BottomCentered);
-        animationRollLeft.addFrame(ResourcesManager::Instance()->findImage(_T("player_roll_left")), 7);
+        animationRollLeft.addFrame(ResourcesManager::Instance()->findImage(_T("playerRollLeft")), 7);
 
         Animation &animationRollRight = animationRoll.right;
         animationRollRight.setInterval(0.05f);
         animationRollRight.setLoop(false);
         animationRollRight.setAnchorMode(Animation::AnchorMode::BottomCentered);
-        animationRollRight.addFrame(ResourcesManager::Instance()->findImage(_T("player_roll_right")), 7);
+        animationRollRight.addFrame(ResourcesManager::Instance()->findImage(_T("playerRollRight")), 7);
     }
     {
         AnimationGroup &animationRun = animationPool["run"];
@@ -128,54 +131,65 @@ Player::Player()
         animationRunLeft.setInterval(0.075f);
         animationRunLeft.setLoop(false);
         animationRunLeft.setAnchorMode(Animation::AnchorMode::BottomCentered);
-        animationRunLeft.addFrame(ResourcesManager::Instance()->findImage(_T("player_run_left")), 10);
+        animationRunLeft.addFrame(ResourcesManager::Instance()->findImage(_T("playerRunLeft")), 10);
 
         Animation &animationRunRight = animationRun.right;
         animationRunRight.setInterval(0.075f);
         animationRunRight.setLoop(false);
         animationRunRight.setAnchorMode(Animation::AnchorMode::BottomCentered);
-        animationRunRight.addFrame(ResourcesManager::Instance()->findImage(_T("player_run_right")), 10);
+        animationRunRight.addFrame(ResourcesManager::Instance()->findImage(_T("playerRunRight")), 10);
     }
     {
         animationSlashUp.setInterval(0.07f);
         animationSlashUp.setLoop(false);
         animationSlashUp.setAnchorMode(Animation::AnchorMode::Centered);
-        animationSlashUp.addFrame(ResourcesManager::Instance()->findImage(_T("player_vfx_attack_up")), 5);
+        animationSlashUp.addFrame(ResourcesManager::Instance()->findImage(_T("playerVfxAttackUp")), 5);
 
         animationSlashDown.setInterval(0.07f);
         animationSlashDown.setLoop(false);
         animationSlashDown.setAnchorMode(Animation::AnchorMode::Centered);
-        animationSlashDown.addFrame(ResourcesManager::Instance()->findImage(_T("player_vfx_attack_down")), 5);
+        animationSlashDown.addFrame(ResourcesManager::Instance()->findImage(_T("playerVfxAttackDown")), 5);
 
         animationSlashLeft.setInterval(0.07f);
         animationSlashLeft.setLoop(false);
         animationSlashLeft.setAnchorMode(Animation::AnchorMode::Centered);
-        animationSlashLeft.addFrame(ResourcesManager::Instance()->findImage(_T("player_vfx_attack_left")), 5);
+        animationSlashLeft.addFrame(ResourcesManager::Instance()->findImage(_T("playerVfxAttackLeft")), 5);
 
         animationSlashRight.setInterval(0.07f);
         animationSlashRight.setLoop(false);
         animationSlashRight.setAnchorMode(Animation::AnchorMode::Centered);
-        animationSlashRight.addFrame(ResourcesManager::Instance()->findImage(_T("player_vfx_attack_rigth")), 5);
+        animationSlashRight.addFrame(ResourcesManager::Instance()->findImage(_T("playerVfxAttackRight")), 5);
 
         animationJumpVfx.setInterval(0.05f);
         animationJumpVfx.setLoop(false);
         animationJumpVfx.setAnchorMode(Animation::AnchorMode::Centered);
-        animationJumpVfx.addFrame(ResourcesManager::Instance()->findImage(_T("player_vfx_jump")), 5);
+        animationJumpVfx.addFrame(ResourcesManager::Instance()->findImage(_T("playerVfxJump")), 5);
         animationJumpVfx.setOnFinished([&]()
                                        { isJumpVfxVisible = false; });
 
         animationLandVfx.setInterval(0.1f);
         animationLandVfx.setLoop(false);
         animationLandVfx.setAnchorMode(Animation::AnchorMode::Centered);
-        animationLandVfx.addFrame(ResourcesManager::Instance()->findImage(_T("player_vfx_land")), 2);
+        animationLandVfx.addFrame(ResourcesManager::Instance()->findImage(_T("playerVfxLand")), 2);
         animationLandVfx.setOnFinished([&]()
                                        { isLandVfxVisible = false; });
     }
     {
-        // [TODO] 状态机初始化
-        
+        // 结尾不加1会编译报错，微软你tm还不修复这个bug？
+        // [TODO] 状态机初始化1
+        stateMachine.registerState("attack", new PlayerAttackState());
+        stateMachine.registerState("dead", new PlayerDeadState());
+        stateMachine.registerState("fall", new PlayerFallState());
+        stateMachine.registerState("idle", new PlayerIdleState());
+        stateMachine.registerState("jump", new PlayerJumpState());
+        stateMachine.registerState("roll", new PlayerRollState());
+        stateMachine.registerState("run", new PlayerRunState());
+
+        stateMachine.setEntry("idle");
     }
 }
+
+Player::~Player() = default;
 
 void Player::input(const ExMessage &msg)
 {
@@ -187,7 +201,7 @@ void Player::input(const ExMessage &msg)
     switch (msg.message)
     {
     case WM_KEYDOWN:
-    {
+
         switch (msg.vkcode)
         {
         case 0x41: // A
@@ -207,11 +221,13 @@ void Player::input(const ExMessage &msg)
         case VK_DOWN:
             isRollKeyDown = true;
             break;
+        case 0x4A: // j
+            isAttackKeyDown = true;
         }
         break;
-    }
+
     case WM_KEYUP:
-    {
+
         switch (msg.vkcode)
         {
         case 0x41: // A
@@ -231,30 +247,36 @@ void Player::input(const ExMessage &msg)
         case VK_DOWN:
             isRollKeyDown = false;
             break;
+        case 0x4A: // j
+            isAttackKeyDown = false;
         }
         break;
-    }
+
     case WM_LBUTTONDOWN:
-    {
+
         isAttackKeyDown = true;
         updateAttackDir(msg.x, msg.y);
         break;
-    }
+
     case WM_LBUTTONUP:
-    {
+
         isAttackKeyDown = false;
         break;
-    }
+
     case WM_RBUTTONDBLCLK:
-    {
-        // [TODO] 进入子弹时间
+
+        // [TODO] 进入子弹时间1
+        playAudio(_T("bullet_time"), false);
+        BulletTimeManager::Instance()->setStatus(BulletTimeManager::Status::Entering);
         break;
-    }
+
     case WM_RBUTTONDOWN:
-    {
-        // [TODO] 退出子弹时间
+
+        // [TODO] 退出子弹时间1
+        playAudio(_T("bullet_time"), false);
+        BulletTimeManager::Instance()->setStatus(BulletTimeManager::Status::Exiting);
+
         break;
-    }
     }
 }
 
@@ -380,4 +402,21 @@ void Player::updateAttackDir(int x, int y)
     }
 }
 
-Player::~Player() = default;
+void Player::log()
+{
+    // std::cout << "Player: " << hp << std::endl;
+    // std::cout << "Position: " << position.x << ", " << position.y << std::endl;
+    // std::cout << "Velocity: " << velocity.x << ", " << velocity.y << std::endl;
+    std::cout << "Facing: " << (isFacingLeft ? "Left" : "Right") << std::endl;
+    std::cout << "OnFloor: " << (isOnFloor() ? "Yes" : "No") << std::endl;
+    // std::cout << "MoveAxis: " << getMoveAxis() << std::endl;
+    std::cout << "A: " << isLeftKeyDown << " D: " << isRightKeyDown << " W: " << isJumpKeyDown << " S: " << isRollKeyDown << " J: " << isAttackKeyDown << std::endl;
+    std::cout << "Rolling: " << isRolling << " RollCdComp: " << isRollCdComp << " Attacking: " << isAttacking << " AttackCdComp: " << isAttackCdComp << std::endl;
+    // std::cout << "Rolling: " << isRolling << std::endl;
+    // std::cout << "RollCdComp: " << isRollCdComp << std::endl;
+    // std::cout << "Attacking: " << isAttacking << std::endl;
+    // std::cout << "AttackCdComp: " << isAttackCdComp << std::endl;
+    std::cout << "JumpVfxVisible: " << isJumpVfxVisible << std::endl;
+    std::cout << "LandVfxVisible: " << isLandVfxVisible << std::endl;
+    std::cout << "\n";
+}

@@ -1,6 +1,9 @@
 #include "character.h"
 #include "collision_manager.h"
 
+#include <string>
+#include <iostream>
+
 Character::Character()
 {
     hitBox = CollisionManager::Instance()->createCollisionBox();
@@ -40,7 +43,7 @@ void Character::decreaseHp()
 
 void Character::update(float delta)
 {
-    // 更新状态机
+    // 更新状态机1
     stateMachine.update(delta);
 
     if (hp <= 0)
@@ -48,7 +51,7 @@ void Character::update(float delta)
         velocity.x = 0;
     }
 
-    // 更新位置
+    // 更新位置1
     if (enableGravity)
     {
         velocity.y += GRAVITY * delta;
@@ -56,14 +59,14 @@ void Character::update(float delta)
 
     position += velocity * delta;
 
-    // 角色落地
+    // 角色落地1
     if (position.y > FLOOR_Y)
     {
         position.y = FLOOR_Y;
         velocity.y = 0;
     }
 
-    // 限制角色在屏幕内
+    // 限制角色在屏幕内1
     if (position.x < 0)
     {
         position.x = 0;
@@ -73,10 +76,10 @@ void Character::update(float delta)
         position.x = (float)getwidth();
     }
 
-    // 更新碰撞箱
+    // 更新碰撞箱1
     hurtBox->setPosition(getLogicCenter());
 
-    // 更新无敌状态
+    // 更新无敌状态1
     timerInvulnerableStatus.update(delta);
 
     if (isInvulnerable)
@@ -84,7 +87,7 @@ void Character::update(float delta)
         timerInvulnerableBlink.update(delta);
     }
 
-    // 更新动画
+    // 更新动画1
     if (!currentAnimation)
     {
         return;
@@ -97,7 +100,11 @@ void Character::update(float delta)
 
 void Character::render()
 {
-    // do nothing
+    if (!currentAnimation || (isInvulnerable && isBlinkInvisible))
+    {
+        return;
+    }
+    (isFacingLeft ? currentAnimation->left : currentAnimation->right).render();
 }
 
 void Character::input(const ExMessage &msg)

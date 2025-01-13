@@ -25,7 +25,7 @@ public:
                             if(idxFrame >= frameList.size()){
                                 idxFrame = isLoop?0:frameList.size()-1;
                                 if(!isLoop && onFinished)
-                                 onFinished();                              
+                                 onFinished();
                             } });
     }
     ~Animation() = default;

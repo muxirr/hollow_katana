@@ -97,6 +97,8 @@ public:
         currentAnimation->right.reset();
     }
 
+    virtual void log() = 0;
+
 protected:
     struct AnimationGroup
     {
@@ -105,56 +107,56 @@ protected:
     };
 
 protected:
-    // 地板Y坐标
+    // 地板Y坐标1
     const float FLOOR_Y = 620;
 
-    // 重力
+    // 重力1
     const float GRAVITY = 980 * 2.0;
 
 protected:
-    // 角色生命值
+    // 角色生命值1
     int hp = 10;
 
-    // 角色脚底位置
+    // 角色脚底位置1
     Vector2 position;
 
-    // 角色速度
+    // 角色速度1
     Vector2 velocity;
 
-    // 角色逻辑高度
+    // 角色逻辑高度1
     float logicHeight = 0;
 
-    // 当前角色是否朝向左
+    // 当前角色是否朝向左1
     bool isFacingLeft = true;
 
-    // 角色逻辑状态机
+    // 角色逻辑状态机1
     StateMachine stateMachine;
 
-    // 启用重力模拟
+    // 启用重力模拟1
     bool enableGravity = true;
 
-    // 当前是否无敌
+    // 当前是否无敌1
     bool isInvulnerable = false;
 
-    // 无敌闪烁状态定时器
+    // 无敌闪烁状态定时器1
     Timer timerInvulnerableBlink;
 
-    // 无敌状态定时器
+    // 无敌状态定时器1
     Timer timerInvulnerableStatus;
 
-    // 当前是否处于闪烁的不可见帧
+    // 当前是否处于闪烁的不可见帧1
     bool isBlinkInvisible = false;
 
-    // 攻击碰撞箱
+    // 攻击碰撞箱1
     CollisionBox *hitBox = nullptr;
 
-    // 受击碰撞箱
+    // 受击碰撞箱1
     CollisionBox *hurtBox = nullptr;
 
-    // 当前角色动画
+    // 当前角色动画1
     AnimationGroup *currentAnimation = nullptr;
 
-    // 角色动画池
+    // 角色动画池1
     std::unordered_map<std::string, AnimationGroup> animationPool;
 };
 
