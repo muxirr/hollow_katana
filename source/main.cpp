@@ -14,51 +14,20 @@
 int FPS = 144;
 const long long NANOSECONDS_PER_SECOND = 1000000000LL;
 
-static void drawBackground()
-{
-    static IMAGE *imgBackground = ResourcesManager::Instance()->findImage(_T("background"));
-    static Rect rectDst = {(getwidth() - imgBackground->getwidth()) / 2, (getheight() - imgBackground->getheight()) / 2, imgBackground->getwidth(), imgBackground->getheight()};
-    putimageEx(imgBackground, &rectDst);
-}
+void drawBackground();
+void readConfig(HWND hwnd);
 
-void readConfig(HWND hwnd)
-{
-    std::ifstream ifs("./assest/config.ini");
-    if (!ifs.is_open())
-    {
-        MessageBox(hwnd, _T("Unable to open assest/config.ini"), _T("Error"), MB_OK | MB_ICONERROR);
-        std::exit(-1);
-    }
-
-    std::string line;
-    while (std::getline(ifs, line))
-    {
-        if (line.empty() || line[0] == '#')
-        {
-            continue;
-        }
-
-        std::string key, value, split;
-        std::istringstream iss(line);
-        iss >> key >> split >> value;
-
-        if (key == "FPS")
-        {
-            FPS = std::stoi(value);
-        }
-    }
-}
-
-int WINAPI
-WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
 {
     // 初始化窗口1
     using namespace std::chrono;
+
 #ifdef DEBUG
     HWND hwnd = initgraph(1280, 720, SHOWCONSOLE);
 #else
     HWND hwnd = initgraph(1280, 720);
 #endif
+
     SetWindowText(hwnd, _T("Hollow Katana"));
     setbkcolor(RGB(0, 0, 0));
 
@@ -77,7 +46,7 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShow
 
     readConfig(hwnd);
 
-    const nanoseconds frameDuration(NANOSECONDS_PER_SECOND / FPS); // 144 FPS
+    const nanoseconds frameDuration(NANOSECONDS_PER_SECOND / FPS);
     steady_clock::time_point lastTime = steady_clock::now();
     ExMessage msg;
     bool isQuit = false;
@@ -132,4 +101,39 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShow
     EndBatchDraw();
 
     return 0;
+}
+
+static void drawBackground()
+{
+    static IMAGE *imgBackground = ResourcesManager::Instance()->findImage(_T("background"));
+    static Rect rectDst = {(getwidth() - imgBackground->getwidth()) / 2, (getheight() - imgBackground->getheight()) / 2, imgBackground->getwidth(), imgBackground->getheight()};
+    putimageEx(imgBackground, &rectDst);
+}
+
+void readConfig(HWND hwnd)
+{
+    std::ifstream ifs("./assest/config.ini");
+    if (!ifs.is_open())
+    {
+        MessageBox(hwnd, _T("Unable to open assest/config.ini"), _T("Error"), MB_OK | MB_ICONERROR);
+        std::exit(-1);
+    }
+
+    std::string line;
+    while (std::getline(ifs, line))
+    {
+        if (line.empty() || line[0] == '#')
+        {
+            continue;
+        }
+
+        std::string key, value, split;
+        std::istringstream iss(line);
+        iss >> key >> split >> value;
+
+        if (key == "FPS")
+        {
+            FPS = std::stoi(value);
+        }
+    }
 }

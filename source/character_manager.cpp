@@ -1,4 +1,5 @@
 #include "player.h"
+#include "enemy.h"
 #include "bullet_time_manager.h"
 #include "character_manager.h"
 
