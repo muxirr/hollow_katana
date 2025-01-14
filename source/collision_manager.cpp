@@ -1,6 +1,7 @@
 #include "collision_manager.h"
 
 #include <graphics.h>
+#include <iostream>
 
 CollisionManager::CollisionManager() = default;
 CollisionManager::~CollisionManager() = default;
@@ -34,10 +35,11 @@ void CollisionManager::processCollide()
                 continue;
             }
 
-            bool isCollide = (bool)(max(src->position.x + src->size.x / 2, dst->position.x + dst->size.x / 2) - min(src->position.x - src->size.x / 2, dst->position.x - dst->size.x / 2)) && (bool)(max(src->position.y + src->size.y / 2, dst->position.y + dst->size.y / 2) - min(src->position.y - src->size.y / 2, dst->position.y - dst->size.y / 2));
-            if (isCollide && src->onCollide)
+            bool isCollide = ((max(src->position.x + src->size.x / 2, dst->position.x + dst->size.x / 2) - min(src->position.x - src->size.x / 2, dst->position.x - dst->size.x / 2)) <= src->size.x + dst->size.x) && ((max(src->position.y + src->size.y / 2, dst->position.y + dst->size.y / 2) - min(src->position.y - src->size.y / 2, dst->position.y - dst->size.y / 2)) <= src->size.y + dst->size.y);
+
+            if (isCollide && dst->onCollide)
             {
-                src->onCollide();
+                dst->onCollide();
             }
         }
     }

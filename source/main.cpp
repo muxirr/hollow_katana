@@ -11,6 +11,7 @@
 #include <fstream>
 
 #define SHOW_FPS
+// #define DEBUG
 
 int FPS = 144;
 const long long NANOSECONDS_PER_SECOND = 1000000000LL;

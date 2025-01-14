@@ -104,7 +104,7 @@ PlayerDeadState::PlayerDeadState()
     timer.setWaitTime(1.0f);
     timer.setOneShot(true);
     timer.setTimeOut([&]()
-                     { MessageBox(nullptr, _T("You are dead!"), _T("Game Over"), MB_OK);
+                     { MessageBox(GetHWnd(), _T("You are dead!"), _T("Game Over"), MB_OK);
                      std::exit(0); });
 }
 
