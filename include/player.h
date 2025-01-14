@@ -85,8 +85,6 @@ private:
     bool isAttacking = false;
     bool isAttackCdComp = true;
 
-    Timer timerLog;
-
     bool isLeftKeyDown = false;
     bool isRightKeyDown = false;
     bool isJumpKeyDown = false;

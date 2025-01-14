@@ -14,7 +14,7 @@ public:
     void destroyCollisionBox(CollisionBox *collisionBox);
 
     void processCollide();
-    void onDebugrender();
+    void debugRender();
 
 private:
     static CollisionManager *manager;

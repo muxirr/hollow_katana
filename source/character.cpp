@@ -1,9 +1,6 @@
 #include "character.h"
 #include "collision_manager.h"
 
-#include <string>
-#include <iostream>
-
 Character::Character()
 {
     hitBox = CollisionManager::Instance()->createCollisionBox();

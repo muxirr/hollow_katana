@@ -62,12 +62,12 @@ public:
 
     void dash();
 
+    void log();
+
 private:
     bool isThrowingSlik = false;
     bool isDashInAir = false;
     bool isDashOnFloor = false;
-
-    Timer timerLog;
 
     Animation animationSilk;
     AnimationGroup animationDashInAirVfx;

@@ -24,7 +24,7 @@ void PlayerAttackState::enter()
     player->attack();
     timer.restart();
 
-    switch (range_random(1, 3))
+    switch (rangeRandom(1, 3))
     {
     case 1:
         playAudio(_T("playerAttack1"), false);

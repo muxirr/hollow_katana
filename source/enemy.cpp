@@ -2,6 +2,9 @@
 #include "character_manager.h"
 #include "resources_manager.h"
 #include "collision_manager.h"
+#include "enemy_state_nodes.h"
+
+#include <iostream>
 
 Enemy::Enemy()
 {
@@ -59,19 +62,19 @@ Enemy::Enemy()
             animationDashInAirRight.addFrame(*ResourcesManager::Instance()->findAtlas(_T("enemyDashInAirRight")));
         }
         {
-            AnimationGroup &animationDashOnFloor = animationPool["DashOnFloor"];
+            AnimationGroup &animationDashOnFloor = animationPool["dashOnFloor"];
 
             Animation &animationDashOnFloorLeft = animationDashOnFloor.left;
             animationDashOnFloorLeft.setInterval(0.05f);
             animationDashOnFloorLeft.setLoop(true);
             animationDashOnFloorLeft.setAnchorMode(Animation::AnchorMode::BottomCentered);
-            animationDashOnFloorLeft.addFrame(*ResourcesManager::Instance()->findAtlas(_T("enemyDashOnFlooranimationDashOnFloorLeft")));
+            animationDashOnFloorLeft.addFrame(*ResourcesManager::Instance()->findAtlas(_T("enemyDashOnFloorLeft")));
 
             Animation &animationDashOnFloorRight = animationDashOnFloor.right;
             animationDashOnFloorRight.setInterval(0.05f);
             animationDashOnFloorRight.setLoop(true);
             animationDashOnFloorRight.setAnchorMode(Animation::AnchorMode::BottomCentered);
-            animationDashOnFloorRight.addFrame(*ResourcesManager::Instance()->findAtlas(_T("enemyDashOnFlooranimationDashOnFloorRight")));
+            animationDashOnFloorRight.addFrame(*ResourcesManager::Instance()->findAtlas(_T("enemyDashOnFloorRight")));
         }
         {
             AnimationGroup &animationFall = animationPool["fall"];
@@ -89,7 +92,7 @@ Enemy::Enemy()
             animationFallRight.addFrame(*ResourcesManager::Instance()->findAtlas(_T("enemyFallRight")));
         }
         {
-            AnimationGroup &animationIdle = animationPool["dashInAir"];
+            AnimationGroup &animationIdle = animationPool["idle"];
 
             Animation &animationIdleLeft = animationIdle.left;
             animationIdleLeft.setInterval(0.1f);
@@ -199,7 +202,7 @@ Enemy::Enemy()
         animationSilk.setInterval(0.1f);
         animationSilk.setLoop(false);
         animationSilk.setAnchorMode(Animation::AnchorMode::Centered);
-        animationSilk.addFrame(*ResourcesManager::Instance()->findAtlas(_T("slik")));
+        animationSilk.addFrame(*ResourcesManager::Instance()->findAtlas(_T("silk")));
 
         Animation &animationDashInAirVfxLeft = animationDashInAirVfx.left;
         animationDashInAirVfxLeft.setInterval(0.1f);
@@ -227,6 +230,20 @@ Enemy::Enemy()
     }
     {
         // [TODO] 状态机初始化1
+        stateMachine.registerState("aim", new EnemyAimState());
+        stateMachine.registerState("dashInAir", new EnemyDashInAirState());
+        stateMachine.registerState("dashOnFloor", new EnemyDashOnFloorState());
+        stateMachine.registerState("dead", new EnemyDeadState());
+        stateMachine.registerState("fall", new EnemyFallState());
+        stateMachine.registerState("idle", new EnemyIdleState());
+        stateMachine.registerState("jump", new EnemyJumpState());
+        stateMachine.registerState("run", new EnemyRunState());
+        stateMachine.registerState("squat", new EnemySquatState());
+        stateMachine.registerState("throwBarb", new EnemyThrowBarbState());
+        stateMachine.registerState("throwSilk", new EnemyThrowSilkState());
+        stateMachine.registerState("throwSword", new EnemyThrowSwordState());
+
+        stateMachine.setEntry("idle");
     }
 }
 
@@ -317,7 +334,7 @@ void Enemy::render()
 
 void Enemy::hurted()
 {
-    switch (range_random(1, 3))
+    switch (rangeRandom(1, 3))
     {
     case 1:
         playAudio(_T("enemyHurt1"), false);
@@ -333,7 +350,7 @@ void Enemy::hurted()
 
 void Enemy::throwBarbs()
 {
-    int numNewBarbs = range_random(3, 6);
+    int numNewBarbs = rangeRandom(3, 6);
     if (barbList.size() >= 10)
     {
         numNewBarbs = 1;
@@ -343,8 +360,8 @@ void Enemy::throwBarbs()
     for (int i = 0; i < numNewBarbs; i++)
     {
         Barb *barb = new Barb();
-        int randX = range_random(i * widthGrid, (i + 1) * widthGrid);
-        int randY = range_random(250, 500);
+        int randX = rangeRandom(i * widthGrid, (i + 1) * widthGrid);
+        int randY = rangeRandom(250, 500);
         barb->setPosition({(float)randX, (float)randY});
         barbList.push_back(barb);
     }
@@ -373,4 +390,10 @@ void Enemy::dash()
 void Enemy::throwSlik()
 {
     animationSilk.reset();
+}
+
+void Enemy::log()
+{
+    std::cout << "\n";
+    std::cout << "Enemy: " << hp;
 }

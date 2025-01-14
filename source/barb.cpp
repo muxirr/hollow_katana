@@ -5,7 +5,7 @@
 
 Barb::Barb()
 {
-    diffPeriod = range_random(0, 6);
+    diffPeriod = rangeRandom(0, 6);
     animationLoose.setInterval(0.15f);
     animationLoose.setLoop(true);
     animationLoose.setAnchorMode(Animation::AnchorMode::Centered);
@@ -25,7 +25,7 @@ Barb::Barb()
     collisionBox->setOnCollide([&]()
                                { breakBarb(); });
 
-    timerIdle.setWaitTime((float)range_random(3, 10));
+    timerIdle.setWaitTime((float)rangeRandom(3, 10));
     timerIdle.setOneShot(true);
     timerIdle.setTimeOut([&]()
                          {if(stage == Stage::Idle){
@@ -68,7 +68,7 @@ void Barb::update(float delta)
         currentPosition.y = basePosition.y + sin(totalDeltaTime * 2 + diffPeriod) * 30;
         break;
     case Stage::Aim:
-        currentPosition.x = basePosition.x + range_random(-10, 10);
+        currentPosition.x = basePosition.x + rangeRandom(-10, 10);
         break;
     case Stage::Dash:
         currentPosition += velocity * delta;

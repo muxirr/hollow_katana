@@ -404,19 +404,19 @@ void Player::updateAttackDir(int x, int y)
 
 void Player::log()
 {
-    // std::cout << "Player: " << hp << std::endl;
+    std::cout << "\n";
+    std::cout << "Player: " << hp;
     // std::cout << "Position: " << position.x << ", " << position.y << std::endl;
-    std::cout << "Velocity: " << velocity.x << ", " << velocity.y << std::endl;
-    std::cout << "Facing: " << (isFacingLeft ? "Left" : "Right") << std::endl;
-    std::cout << "OnFloor: " << (isOnFloor() ? "Yes" : "No") << std::endl;
-    // std::cout << "MoveAxis: " << getMoveAxis() << std::endl;
-    std::cout << "A: " << isLeftKeyDown << " D: " << isRightKeyDown << " W: " << isJumpKeyDown << " S: " << isRollKeyDown << " J: " << isAttackKeyDown << std::endl;
-    std::cout << "Rolling: " << isRolling << " RollCdComp: " << isRollCdComp << " Attacking: " << isAttacking << " AttackCdComp: " << isAttackCdComp << std::endl;
+    // std::cout << "Velocity: " << velocity.x << ", " << velocity.y << std::endl;
+    // std::cout << "Facing: " << (isFacingLeft ? "Left" : "Right") << std::endl;
+    // std::cout << "OnFloor: " << (isOnFloor() ? "Yes" : "No") << std::endl;
+    // // std::cout << "MoveAxis: " << getMoveAxis() << std::endl;
+    // std::cout << "A: " << isLeftKeyDown << " D: " << isRightKeyDown << " W: " << isJumpKeyDown << " S: " << isRollKeyDown << " J: " << isAttackKeyDown << std::endl;
+    // std::cout << "Rolling: " << isRolling << " RollCdComp: " << isRollCdComp << " Attacking: " << isAttacking << " AttackCdComp: " << isAttackCdComp << std::endl;
     // std::cout << "Rolling: " << isRolling << std::endl;
     // std::cout << "RollCdComp: " << isRollCdComp << std::endl;
     // std::cout << "Attacking: " << isAttacking << std::endl;
     // std::cout << "AttackCdComp: " << isAttackCdComp << std::endl;
-    std::cout << "JumpVfxVisible: " << isJumpVfxVisible << std::endl;
-    std::cout << "LandVfxVisible: " << isLandVfxVisible << std::endl;
-    std::cout << "\n";
+    // std::cout << "JumpVfxVisible: " << isJumpVfxVisible << std::endl;
+    // std::cout << "LandVfxVisible: " << isLandVfxVisible << std::endl;
 }

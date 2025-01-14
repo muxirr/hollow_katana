@@ -21,30 +21,29 @@ void CharacterManager::input(const ExMessage &msg)
 
 void CharacterManager::update(float delta)
 {
+    enemy->update(delta);
     player->update(delta);
-
     timerLog.update(delta);
 }
 
 void CharacterManager::render()
 {
+    enemy->render();
     BulletTimeManager::Instance()->postProcess();
     player->render();
 }
 
-void CharacterManager::log()
-{
-    player->log();
-}
-
 CharacterManager::CharacterManager()
 {
+    this->enemy = new Enemy();
     this->player = new Player();
 
     timerLog.setWaitTime(0.1f);
     timerLog.setOneShot(false);
     timerLog.setTimeOut([&]()
-                        { player->log(); });
+                        {
+                            player->log();
+                            enemy->log(); });
 }
 
 CharacterManager::~CharacterManager()

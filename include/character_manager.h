@@ -21,7 +21,6 @@ public:
     void input(const ExMessage &msg);
     void update(float delta);
     void render();
-    void log();
 
 private:
     static CharacterManager *manager;

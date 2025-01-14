@@ -3,7 +3,6 @@
 #include "character_manager.h"
 #include "collision_manager.h"
 #include "bullet_time_manager.h"
-#include "test_defines.h"
 
 #include <windows.h>
 #include <graphics.h>
@@ -11,11 +10,14 @@
 #include <thread>
 #include <fstream>
 
+#define SHOW_FPS
+
 int FPS = 144;
 const long long NANOSECONDS_PER_SECOND = 1000000000LL;
 
 void drawBackground();
 void readConfig(HWND hwnd);
+static void drawRemianHp();
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
 {
@@ -44,6 +46,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         return -1;
     }
 
+    playAudio(_T("bgm"), true);
     readConfig(hwnd);
 
     const nanoseconds frameDuration(NANOSECONDS_PER_SECOND / FPS);
@@ -73,14 +76,18 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
         // 处理绘图1
         drawBackground();
+        drawRemianHp();
         CharacterManager::Instance()->render();
-        CollisionManager::Instance()->onDebugrender();
+
+#ifdef DEBUG
+        CollisionManager::Instance()->debugRender();
+#endif
 
 #ifdef SHOW_FPS
         double fps = 1.0 / delta.count();
         TCHAR fpsStr[32];
         sprintf(fpsStr, _T("FPS: %.2f"), fps);
-        outtextxy(10, 10, fpsStr);
+        outtextxy(10, 705, fpsStr);
 #endif
         FlushBatchDraw();
 
@@ -135,5 +142,36 @@ void readConfig(HWND hwnd)
         {
             FPS = std::stoi(value);
         }
+    }
+}
+
+static void drawRemianHp()
+{
+    static IMAGE *imgUiHeart = ResourcesManager::Instance()->findImage(_T("uiHeart"));
+    static IMAGE *enemyIdle = ResourcesManager::Instance()->findAtlas(_T("enemyIdleLeft"))->getImage(0);
+    static IMAGE *playerIdle = ResourcesManager::Instance()->findImage(_T("playerIdleRight"));
+
+    static int w = playerIdle->getwidth() / 5;
+    static float playerScale = playerIdle->getheight() / static_cast<float>(w);
+    static float enemyScale = static_cast<float>(enemyIdle->getheight()) / enemyIdle->getwidth();
+
+    static Rect rectDst = {0, 10, imgUiHeart->getwidth(), imgUiHeart->getheight()};
+    static Rect rectPlayerDst = {0, 5, imgUiHeart->getheight() / playerScale, imgUiHeart->getheight()};
+    static Rect rectEnemyDst = {1240, 10, imgUiHeart->getheight() / enemyScale, imgUiHeart->getheight()};
+    static Rect rectPlayerSrc = {0, 0, w, playerIdle->getheight()};
+    static Rect rectEnemySrc = {0, 0, enemyIdle->getwidth(), enemyIdle->getheight()};
+
+    putimageEx(playerIdle, &rectPlayerDst, &rectPlayerSrc);
+    putimageEx(enemyIdle, &rectEnemyDst, &rectEnemySrc);
+
+    for (int i = 0; i < CharacterManager::Instance()->getPlayer()->getHp(); i++)
+    {
+        rectDst.x = 40 + i * 40;
+        putimageEx(imgUiHeart, &rectDst);
+    }
+    for (int i = 0; i < CharacterManager::Instance()->getEnemy()->getHp(); i++)
+    {
+        rectDst.x = 1200 - i * 40;
+        putimageEx(imgUiHeart, &rectDst);
     }
 }

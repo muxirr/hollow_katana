@@ -40,7 +40,7 @@ inline void stopAudio(LPCTSTR id)
     mciSendString(strCmd, NULL, 0, NULL);
 }
 
-inline int range_random(int min, int max)
+inline int rangeRandom(int min, int max)
 {
     return min + rand() % (max - min + 1);
 }

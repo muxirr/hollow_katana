@@ -43,7 +43,7 @@ void CollisionManager::processCollide()
     }
 }
 
-void CollisionManager::onDebugrender()
+void CollisionManager::debugRender()
 {
     for (CollisionBox *collisionBox : collisionBoxList)
     {
