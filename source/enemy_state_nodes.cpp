@@ -41,7 +41,8 @@ void EnemyDashInAirState::enter()
     const Character *player = CharacterManager::Instance()->getPlayer();
     Vector2 posTarget = {player->getPosition().x, player->getFloorY()};
     enemy->setVelocity((posTarget - enemy->getPosition()).normalize() * DASH_SPEED);
-    enemy->setGravityEnable(true);
+    enemy->setDashInAir(true);
+    enemy->setGravityEnable(false);
     enemy->dash();
 
     playAudio(_T("enemyDash"), false);

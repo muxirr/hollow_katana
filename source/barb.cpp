@@ -85,7 +85,7 @@ void Barb::update(float delta)
     collisionBox->setPosition(currentPosition);
 
     // 更新动画1
-    currentAnimation = (stage == Stage::Idle ? &animationBreak : &animationLoose);
+    currentAnimation = (stage == Stage::Break ? &animationBreak : &animationLoose);
     currentAnimation->setPosition(currentPosition);
     currentAnimation->update(delta);
 }

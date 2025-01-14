@@ -13,7 +13,7 @@ Enemy::Enemy()
     logicHeight = 150;
 
     hitBox->setSize({50, 80});
-    hurtBox->setSize({100, 100});
+    hurtBox->setSize({100, 180});
 
     hitBox->setLayerSrc(CollisionLayer::None);
     hitBox->setLayerDst(CollisionLayer::Player);
@@ -156,13 +156,13 @@ Enemy::Enemy()
 
             Animation &animationThrowBarbLeft = animationThrowBarb.left;
             animationThrowBarbLeft.setInterval(0.1f);
-            animationThrowBarbLeft.setLoop(true);
+            animationThrowBarbLeft.setLoop(false);
             animationThrowBarbLeft.setAnchorMode(Animation::AnchorMode::BottomCentered);
             animationThrowBarbLeft.addFrame(*ResourcesManager::Instance()->findAtlas(_T("enemyThrowBarbLeft")));
 
             Animation &animationThrowBarbRight = animationThrowBarb.right;
             animationThrowBarbRight.setInterval(0.1f);
-            animationThrowBarbRight.setLoop(true);
+            animationThrowBarbRight.setLoop(false);
             animationThrowBarbRight.setAnchorMode(Animation::AnchorMode::BottomCentered);
             animationThrowBarbRight.addFrame(*ResourcesManager::Instance()->findAtlas(_T("enemyThrowBarbRight")));
         }
@@ -185,14 +185,14 @@ Enemy::Enemy()
             AnimationGroup &animationThrowSword = animationPool["throwSword"];
 
             Animation &animationThrowSwordLeft = animationThrowSword.left;
-            animationThrowSwordLeft.setInterval(0.1f);
-            animationThrowSwordLeft.setLoop(true);
+            animationThrowSwordLeft.setInterval(0.05f);
+            animationThrowSwordLeft.setLoop(false);
             animationThrowSwordLeft.setAnchorMode(Animation::AnchorMode::BottomCentered);
             animationThrowSwordLeft.addFrame(*ResourcesManager::Instance()->findAtlas(_T("enemyThrowSwordLeft")));
 
             Animation &animationThrowSwordRight = animationThrowSword.right;
-            animationThrowSwordRight.setInterval(0.1f);
-            animationThrowSwordRight.setLoop(true);
+            animationThrowSwordRight.setInterval(0.05f);
+            animationThrowSwordRight.setLoop(false);
             animationThrowSwordRight.setAnchorMode(Animation::AnchorMode::BottomCentered);
             animationThrowSwordRight.addFrame(*ResourcesManager::Instance()->findAtlas(_T("enemyThrowSwordRight")));
         }
