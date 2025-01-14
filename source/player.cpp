@@ -69,13 +69,13 @@ Player::Player()
 
         Animation &animationFallLeft = animationFall.left;
         animationFallLeft.setInterval(0.15f);
-        animationFallLeft.setLoop(false);
+        animationFallLeft.setLoop(true);
         animationFallLeft.setAnchorMode(Animation::AnchorMode::BottomCentered);
         animationFallLeft.addFrame(ResourcesManager::Instance()->findImage(_T("playerFallLeft")), 5);
 
         Animation &animationFallRight = animationFall.right;
         animationFallRight.setInterval(0.15f);
-        animationFallRight.setLoop(false);
+        animationFallRight.setLoop(true);
         animationFallRight.setAnchorMode(Animation::AnchorMode::BottomCentered);
         animationFallRight.addFrame(ResourcesManager::Instance()->findImage(_T("playerFallRight")), 5);
     }
@@ -84,13 +84,13 @@ Player::Player()
 
         Animation &animationIdleLeft = animationIdle.left;
         animationIdleLeft.setInterval(0.15f);
-        animationIdleLeft.setLoop(false);
+        animationIdleLeft.setLoop(true);
         animationIdleLeft.setAnchorMode(Animation::AnchorMode::BottomCentered);
         animationIdleLeft.addFrame(ResourcesManager::Instance()->findImage(_T("playerIdleLeft")), 5);
 
         Animation &animationIdleRight = animationIdle.right;
         animationIdleRight.setInterval(0.15f);
-        animationIdleRight.setLoop(false);
+        animationIdleRight.setLoop(true);
         animationIdleRight.setAnchorMode(Animation::AnchorMode::BottomCentered);
         animationIdleRight.addFrame(ResourcesManager::Instance()->findImage(_T("playerIdleRight")), 5);
     }
@@ -129,13 +129,13 @@ Player::Player()
 
         Animation &animationRunLeft = animationRun.left;
         animationRunLeft.setInterval(0.075f);
-        animationRunLeft.setLoop(false);
+        animationRunLeft.setLoop(true);
         animationRunLeft.setAnchorMode(Animation::AnchorMode::BottomCentered);
         animationRunLeft.addFrame(ResourcesManager::Instance()->findImage(_T("playerRunLeft")), 10);
 
         Animation &animationRunRight = animationRun.right;
         animationRunRight.setInterval(0.075f);
-        animationRunRight.setLoop(false);
+        animationRunRight.setLoop(true);
         animationRunRight.setAnchorMode(Animation::AnchorMode::BottomCentered);
         animationRunRight.addFrame(ResourcesManager::Instance()->findImage(_T("playerRunRight")), 10);
     }
@@ -396,7 +396,7 @@ void Player::updateAttackDir(int x, int y)
     {
         attackDir = AttackDir::Left;
     }
-    else
+    else if (angle >= -3 * PI / 4 && angle <= -PI / 4)
     {
         attackDir = AttackDir::Up;
     }
@@ -406,7 +406,7 @@ void Player::log()
 {
     // std::cout << "Player: " << hp << std::endl;
     // std::cout << "Position: " << position.x << ", " << position.y << std::endl;
-    // std::cout << "Velocity: " << velocity.x << ", " << velocity.y << std::endl;
+    std::cout << "Velocity: " << velocity.x << ", " << velocity.y << std::endl;
     std::cout << "Facing: " << (isFacingLeft ? "Left" : "Right") << std::endl;
     std::cout << "OnFloor: " << (isOnFloor() ? "Yes" : "No") << std::endl;
     // std::cout << "MoveAxis: " << getMoveAxis() << std::endl;

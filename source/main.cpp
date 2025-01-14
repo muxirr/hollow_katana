@@ -9,8 +9,9 @@
 #include <graphics.h>
 #include <chrono>
 #include <thread>
+#include <fstream>
 
-const int FPS = 144;
+int FPS = 144;
 const long long NANOSECONDS_PER_SECOND = 1000000000LL;
 
 static void drawBackground()
@@ -18,6 +19,34 @@ static void drawBackground()
     static IMAGE *imgBackground = ResourcesManager::Instance()->findImage(_T("background"));
     static Rect rectDst = {(getwidth() - imgBackground->getwidth()) / 2, (getheight() - imgBackground->getheight()) / 2, imgBackground->getwidth(), imgBackground->getheight()};
     putimageEx(imgBackground, &rectDst);
+}
+
+void readConfig(HWND hwnd)
+{
+    std::ifstream ifs("./assest/config.ini");
+    if (!ifs.is_open())
+    {
+        MessageBox(hwnd, _T("Unable to open assest/config.ini"), _T("Error"), MB_OK | MB_ICONERROR);
+        std::exit(-1);
+    }
+
+    std::string line;
+    while (std::getline(ifs, line))
+    {
+        if (line.empty() || line[0] == '#')
+        {
+            continue;
+        }
+
+        std::string key, value, split;
+        std::istringstream iss(line);
+        iss >> key >> split >> value;
+
+        if (key == "FPS")
+        {
+            FPS = std::stoi(value);
+        }
+    }
 }
 
 int WINAPI
@@ -45,6 +74,8 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShow
         MessageBox(hwnd, errMsg, _T("Resource loading failure"), MB_OK | MB_ICONERROR);
         return -1;
     }
+
+    readConfig(hwnd);
 
     const nanoseconds frameDuration(NANOSECONDS_PER_SECOND / FPS); // 144 FPS
     steady_clock::time_point lastTime = steady_clock::now();

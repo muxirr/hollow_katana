@@ -70,6 +70,7 @@ void PlayerAttackState::exit()
 {
     Player *player = (Player *)CharacterManager::Instance()->getPlayer();
     player->getHitBox()->setEnabled(false);
+    player->setAttacking(false);
 }
 
 void PlayerAttackState::updateHitBoxPosition()

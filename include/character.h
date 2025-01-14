@@ -89,6 +89,7 @@ public:
     {
         stateMachine.switchTo(id);
     }
+
     void setAnimation(const std::string &id)
     {
         currentAnimation = &animationPool[id];

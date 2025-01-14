@@ -23,9 +23,9 @@ public:
         timer.setTimeOut([&]()
                          {  idxFrame++;
                             if(idxFrame >= frameList.size()){
-                                idxFrame = isLoop?0:frameList.size()-1;
+                                idxFrame = (isLoop?0:frameList.size()-1);
                                 if(!isLoop && onFinished)
-                                 onFinished();
+                                    onFinished();
                             } });
     }
     ~Animation() = default;

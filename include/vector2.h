@@ -18,16 +18,19 @@ public:
     {
         return Vector2(x + v.x, y + v.y);
     }
+
     void operator+=(const Vector2 &v)
     {
         x += v.x;
         y += v.y;
     }
+
     void operator-=(const Vector2 &v)
     {
         x -= v.x;
         y -= v.y;
     }
+
     Vector2 operator-(const Vector2 &v) const
     {
         return Vector2(x - v.x, y - v.y);
@@ -37,22 +40,27 @@ public:
     {
         return Vector2(x * scalar, y * scalar);
     }
+
     Vector2 operator*=(float scalar) const
     {
         return Vector2(x * scalar, y * scalar);
     }
+
     Vector2 operator/=(float scalar) const
     {
         return Vector2(x / scalar, y / scalar);
     }
+
     float operator*(const Vector2 &v) const
     {
         return x * v.x + y * v.y;
     }
+
     Vector2 operator/(float scalar) const
     {
         return Vector2(x / scalar, y / scalar);
     }
+
     float length() const
     {
         return sqrt(x * x + y * y);
