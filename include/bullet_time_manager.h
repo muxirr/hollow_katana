@@ -37,7 +37,7 @@ private:
     // 线性插值1
     float lerp(float start, float end, float t)
     {
-        return (1 - t) * start + t - end;
+        return (1 - t) * start + t * end;
     }
 };
 

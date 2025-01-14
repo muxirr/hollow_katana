@@ -263,17 +263,17 @@ void Player::input(const ExMessage &msg)
         isAttackKeyDown = false;
         break;
 
-    case WM_RBUTTONDBLCLK:
+    case WM_RBUTTONDOWN:
 
         // [TODO] 进入子弹时间1
-        playAudio(_T("bullet_time"), false);
+        playAudio(_T("bulletTime"), false);
         BulletTimeManager::Instance()->setStatus(BulletTimeManager::Status::Entering);
         break;
 
-    case WM_RBUTTONDOWN:
+    case WM_RBUTTONUP:
 
         // [TODO] 退出子弹时间1
-        playAudio(_T("bullet_time"), false);
+        playAudio(_T("bulletTime"), false);
         BulletTimeManager::Instance()->setStatus(BulletTimeManager::Status::Exiting);
 
         break;

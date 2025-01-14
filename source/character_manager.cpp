@@ -40,7 +40,7 @@ CharacterManager::CharacterManager()
 {
     this->player = new Player();
 
-    timerLog.setWaitTime(1.0f);
+    timerLog.setWaitTime(0.1f);
     timerLog.setOneShot(false);
     timerLog.setTimeOut([&]()
                         { player->log(); });
