@@ -2,4 +2,5 @@
 .cache/
 .vs/
 .vscode/
+out/
 build/
