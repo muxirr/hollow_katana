@@ -21,45 +21,45 @@ struct atlasResInfo
 };
 
 static const std::vector<imgResInfo> imgInfoList = {
-    {_T("background"), _T(R"(assest\background.png)")},
-    {_T("uiHeart"), _T(R"(assest\ui_heart.png)")},
+    {_T("background"), _T(R"(assets\background.png)")},
+    {_T("uiHeart"), _T(R"(assets\ui_heart.png)")},
 
-    {_T("playerAttackRight"), _T(R"(assest\player\attack.png)")},
-    {_T("playerDeadRight"), _T(R"(assest\player\dead.png)")},
-    {_T("playerFallRight"), _T(R"(assest\player\fall.png)")},
-    {_T("playerIdleRight"), _T(R"(assest\player\idle.png)")},
-    {_T("playerJumpRight"), _T(R"(assest\player\jump.png)")},
-    {_T("playerRunRight"), _T(R"(assest\player\run.png)")},
-    {_T("playerRollRight"), _T(R"(assest\player\roll.png)")},
+    {_T("playerAttackRight"), _T(R"(assets\player\attack.png)")},
+    {_T("playerDeadRight"), _T(R"(assets\player\dead.png)")},
+    {_T("playerFallRight"), _T(R"(assets\player\fall.png)")},
+    {_T("playerIdleRight"), _T(R"(assets\player\idle.png)")},
+    {_T("playerJumpRight"), _T(R"(assets\player\jump.png)")},
+    {_T("playerRunRight"), _T(R"(assets\player\run.png)")},
+    {_T("playerRollRight"), _T(R"(assets\player\roll.png)")},
 
-    {_T("playerVfxAttackDown"), _T(R"(assest\player\vfx_attack_down.png)")},
-    {_T("playerVfxAttackLeft"), _T(R"(assest\player\vfx_attack_left.png)")},
-    {_T("playerVfxAttackRight"), _T(R"(assest\player\vfx_attack_right.png)")},
-    {_T("playerVfxAttackUp"), _T(R"(assest\player\vfx_attack_up.png)")},
-    {_T("playerVfxJump"), _T(R"(assest\player\vfx_jump.png)")},
-    {_T("playerVfxLand"), _T(R"(assest\player\vfx_land.png)")},
+    {_T("playerVfxAttackDown"), _T(R"(assets\player\vfx_attack_down.png)")},
+    {_T("playerVfxAttackLeft"), _T(R"(assets\player\vfx_attack_left.png)")},
+    {_T("playerVfxAttackRight"), _T(R"(assets\player\vfx_attack_right.png)")},
+    {_T("playerVfxAttackUp"), _T(R"(assets\player\vfx_attack_up.png)")},
+    {_T("playerVfxJump"), _T(R"(assets\player\vfx_jump.png)")},
+    {_T("playerVfxLand"), _T(R"(assets\player\vfx_land.png)")},
 };
 
 static const std::vector<atlasResInfo> atlasInfoList = {
-    {_T("barbBreak"), _T(R"(assest\enemy\barb_break\%d.png)"), 3},
-    {_T("barbLoose"), _T(R"(assest\enemy\barb_loose\%d.png)"), 5},
-    {_T("silk"), _T(R"(assest\enemy\silk\%d.png)"), 9},
-    {_T("swordLeft"), _T(R"(assest\enemy\sword\%d.png)"), 3},
+    {_T("barbBreak"), _T(R"(assets\enemy\barb_break\%d.png)"), 3},
+    {_T("barbLoose"), _T(R"(assets\enemy\barb_loose\%d.png)"), 5},
+    {_T("silk"), _T(R"(assets\enemy\silk\%d.png)"), 9},
+    {_T("swordLeft"), _T(R"(assets\enemy\sword\%d.png)"), 3},
 
-    {_T("enemyAimLeft"), _T(R"(assest\enemy\aim\%d.png)"), 9},
-    {_T("enemyDashInAirLeft"), _T(R"(assest\enemy\dash_in_air\%d.png)"), 2},
-    {_T("enemyDashOnFloorLeft"), _T(R"(assest\enemy\dash_on_floor\%d.png)"), 2},
-    {_T("enemyFallLeft"), _T(R"(assest\enemy\fall\%d.png)"), 4},
-    {_T("enemyIdleLeft"), _T(R"(assest\enemy\idle\%d.png)"), 6},
-    {_T("enemyJumpLeft"), _T(R"(assest\enemy\jump\%d.png)"), 8},
-    {_T("enemyRunLeft"), _T(R"(assest\enemy\run\%d.png)"), 8},
-    {_T("enemySquatLeft"), _T(R"(assest\enemy\squat\%d.png)"), 10},
-    {_T("enemyThrowBarbLeft"), _T(R"(assest\enemy\throw_barb\%d.png)"), 8},
-    {_T("enemyThrowSilkLeft"), _T(R"(assest\enemy\throw_silk\%d.png)"), 17},
-    {_T("enemyThrowSwordLeft"), _T(R"(assest\enemy\throw_sword\%d.png)"), 16},
+    {_T("enemyAimLeft"), _T(R"(assets\enemy\aim\%d.png)"), 9},
+    {_T("enemyDashInAirLeft"), _T(R"(assets\enemy\dash_in_air\%d.png)"), 2},
+    {_T("enemyDashOnFloorLeft"), _T(R"(assets\enemy\dash_on_floor\%d.png)"), 2},
+    {_T("enemyFallLeft"), _T(R"(assets\enemy\fall\%d.png)"), 4},
+    {_T("enemyIdleLeft"), _T(R"(assets\enemy\idle\%d.png)"), 6},
+    {_T("enemyJumpLeft"), _T(R"(assets\enemy\jump\%d.png)"), 8},
+    {_T("enemyRunLeft"), _T(R"(assets\enemy\run\%d.png)"), 8},
+    {_T("enemySquatLeft"), _T(R"(assets\enemy\squat\%d.png)"), 10},
+    {_T("enemyThrowBarbLeft"), _T(R"(assets\enemy\throw_barb\%d.png)"), 8},
+    {_T("enemyThrowSilkLeft"), _T(R"(assets\enemy\throw_silk\%d.png)"), 17},
+    {_T("enemyThrowSwordLeft"), _T(R"(assets\enemy\throw_sword\%d.png)"), 16},
 
-    {_T("enemyDashInAirVfxLeft"), _T(R"(assest\enemy\vfx_dash_in_air\%d.png)"), 5},
-    {_T("enemyDashOnFloorVfxLeft"), _T(R"(assest\enemy\vfx_dash_on_floor\%d.png)"), 6},
+    {_T("enemyDashInAirVfxLeft"), _T(R"(assets\enemy\vfx_dash_in_air\%d.png)"), 5},
+    {_T("enemyDashOnFloorVfxLeft"), _T(R"(assets\enemy\vfx_dash_on_floor\%d.png)"), 6},
 };
 
 static inline bool checkImageValid(IMAGE *img)
@@ -117,28 +117,28 @@ void ResourcesManager::load()
     flipAtlas(_T("enemyDashInAirVfxLeft"), _T("enemyDashInAirVfxRight"));
     flipAtlas(_T("enemyDashOnFloorVfxLeft"), _T("enemyDashOnFloorVfxRight"));
 
-    loadAudio(_T(R"(assest\audio\bgm.mp3)"), _T("bgm"));
-    loadAudio(_T(R"(assest\audio\barb_break.mp3)"), _T("barbBreak"));
-    loadAudio(_T(R"(assest\audio\bullet_time.mp3)"), _T("bulletTime"));
+    loadAudio(_T(R"(assets\audio\bgm.mp3)"), _T("bgm"));
+    loadAudio(_T(R"(assets\audio\barb_break.mp3)"), _T("barbBreak"));
+    loadAudio(_T(R"(assets\audio\bullet_time.mp3)"), _T("bulletTime"));
 
-    loadAudio(_T(R"(assest\audio\enemy_dash.mp3)"), _T("enemyDash"));
-    loadAudio(_T(R"(assest\audio\enemy_run.mp3)"), _T("enemyRun"));
-    loadAudio(_T(R"(assest\audio\enemy_hurt_1.mp3)"), _T("enemyHurt1"));
-    loadAudio(_T(R"(assest\audio\enemy_hurt_2.mp3)"), _T("enemyHurt2"));
-    loadAudio(_T(R"(assest\audio\enemy_hurt_3.mp3)"), _T("enemyHurt3"));
-    loadAudio(_T(R"(assest\audio\enemy_throw_barb.mp3)"), _T("enemyThrowBarb"));
-    loadAudio(_T(R"(assest\audio\enemy_throw_silk.mp3)"), _T("enemyThrowSilk"));
-    loadAudio(_T(R"(assest\audio\enemy_throw_sword.mp3)"), _T("enemyThrowSword"));
+    loadAudio(_T(R"(assets\audio\enemy_dash.mp3)"), _T("enemyDash"));
+    loadAudio(_T(R"(assets\audio\enemy_run.mp3)"), _T("enemyRun"));
+    loadAudio(_T(R"(assets\audio\enemy_hurt_1.mp3)"), _T("enemyHurt1"));
+    loadAudio(_T(R"(assets\audio\enemy_hurt_2.mp3)"), _T("enemyHurt2"));
+    loadAudio(_T(R"(assets\audio\enemy_hurt_3.mp3)"), _T("enemyHurt3"));
+    loadAudio(_T(R"(assets\audio\enemy_throw_barb.mp3)"), _T("enemyThrowBarb"));
+    loadAudio(_T(R"(assets\audio\enemy_throw_silk.mp3)"), _T("enemyThrowSilk"));
+    loadAudio(_T(R"(assets\audio\enemy_throw_sword.mp3)"), _T("enemyThrowSword"));
 
-    loadAudio(_T(R"(assest\audio\player_attack_1.mp3)"), _T("playerAttack1"));
-    loadAudio(_T(R"(assest\audio\player_attack_2.mp3)"), _T("playerAttack2"));
-    loadAudio(_T(R"(assest\audio\player_attack_3.mp3)"), _T("playerAttack3"));
-    loadAudio(_T(R"(assest\audio\player_dead.mp3)"), _T("playerDead"));
-    loadAudio(_T(R"(assest\audio\player_hurt.mp3)"), _T("playerHurt"));
-    loadAudio(_T(R"(assest\audio\player_jump.mp3)"), _T("playerJump"));
-    loadAudio(_T(R"(assest\audio\player_land.mp3)"), _T("playerLand"));
-    loadAudio(_T(R"(assest\audio\player_roll.mp3)"), _T("playerRoll"));
-    loadAudio(_T(R"(assest\audio\player_run.mp3)"), _T("playerRun"));
+    loadAudio(_T(R"(assets\audio\player_attack_1.mp3)"), _T("playerAttack1"));
+    loadAudio(_T(R"(assets\audio\player_attack_2.mp3)"), _T("playerAttack2"));
+    loadAudio(_T(R"(assets\audio\player_attack_3.mp3)"), _T("playerAttack3"));
+    loadAudio(_T(R"(assets\audio\player_dead.mp3)"), _T("playerDead"));
+    loadAudio(_T(R"(assets\audio\player_hurt.mp3)"), _T("playerHurt"));
+    loadAudio(_T(R"(assets\audio\player_jump.mp3)"), _T("playerJump"));
+    loadAudio(_T(R"(assets\audio\player_land.mp3)"), _T("playerLand"));
+    loadAudio(_T(R"(assets\audio\player_roll.mp3)"), _T("playerRoll"));
+    loadAudio(_T(R"(assets\audio\player_run.mp3)"), _T("playerRun"));
 }
 
 Atlas *ResourcesManager::findAtlas(const std::string &id) const
